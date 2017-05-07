@@ -63,10 +63,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-         <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+           <dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-web</artifactId>
+  </dependency>
+  <dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-config</artifactId>
+  </dependency>
+  <dependency>
+	<groupId>org.thymeleaf.extras</groupId>
+	<artifactId>thymeleaf-extras-springsecurity4</artifactId>	
+  </dependency>
 
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
 		<dependency>
@@ -119,15 +127,46 @@
             <artifactId>jquery-ui</artifactId>
             <version>${jquery-ui.version}</version>
         </dependency>
-
-<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>6.0.6</version>
-</dependency>
+			<groupId>com.github.dandelion</groupId>
+			<artifactId>datatables-thymeleaf</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.dandelion</groupId>
+			<artifactId>dandelion-thymeleaf</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.dandelion</groupId>
+			<artifactId>dandelion-core</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
-       
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Need this for json to/from object -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		
     </dependencies>
 
     <build>
@@ -149,10 +188,6 @@
             </resource>
         </resources>
         <plugins>
-        
-        
-
-        
        
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -162,29 +197,7 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>buildnumber-maven-plugin</artifactId>
-                        <version>1.4</version>
-                        <executions>
-                            <execution>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>create</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+
         <profile>
             <id>heroku</id>
             <activation>
