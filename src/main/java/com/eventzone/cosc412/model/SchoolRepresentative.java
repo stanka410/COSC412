@@ -78,7 +78,13 @@ public class SchoolRepresentative {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + schoolRepId + ", userId=" + userId + ", ticketId=" + schoolId + "]";
+		Stringbuilder sb = new Stringbuilder(100);
+		return sb.append("Customer [customerId=").append(schoolRepId)
+				.append(", userId=").append(userId)
+				.append(", ticketId=").append(ticketId)
+				.append(", schoolId=").append(schoolId)
+				.append("]")
+				.toString();
 	}
   
 }

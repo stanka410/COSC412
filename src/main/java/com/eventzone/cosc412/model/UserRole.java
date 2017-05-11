@@ -86,7 +86,11 @@ public class UserRole {
 
 	@Override
 	public String toString() {
-		return "UserType [userRoleId=" + userRoleId + ", userRole=" + userRole + "]";
+		Stringbuilder sb = new Stringbuilder(100);
+		return sb.append("UserType [userRoleId=").append(userRoleId)
+				.append(", userRole=").append(userRole)
+				.append("]")
+				.toString();
 	}
  
 }

@@ -88,8 +88,13 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", userId=" + userId + ", ticketId=" + ticketId + ", eventId="
-				+ eventId + "]";
+		Stringbuider sb = new StringBuilder(100);
+		return sb.append("Customer [customerId=").append(customerId)
+				.append(", userId=").append(userId)
+				.append(", ticketId=").append(ticketId)
+				.append(", eventId=").append(eventId)
+				.append("]")
+				.toString();		
 	}
   
 }

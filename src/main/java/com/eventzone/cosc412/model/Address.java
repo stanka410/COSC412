@@ -118,8 +118,14 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", streetAddress=" + streetAddress + ", city=" + city + ", county="
-				+ state + ", zip=" + zip + "]";
+		Stringbuilder sb = new StringBuilder(100);
+		return sb.append("Address [addressId=").append(addressId)
+				.append(", streetAddress=").append(streetAddress)
+				.append(", city=").append(city)
+				.append(", county=").append(state)
+				.append(", zip").append(zip);
+				.append("]")
+				.toString();				
 	}
     
 }

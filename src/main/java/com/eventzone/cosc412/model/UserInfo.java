@@ -220,9 +220,19 @@ public class UserInfo {
 
 	@Override
 	public String toString() {
-		return "UserInfo [userInfoId=" + userInfoId + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", active=" + active + ", phone=" + phone
-				+ ", addressId=" + addressId + ", dateOfBirth=" + dateOfBirth + ", roles=" + roles + ", createdDate="
-				+ createdDate + "]";
+		Stringbuilder = new Stringbuilder(100);
+		return sb.append("UserInfo [userInfoId=").append(userInfoId)
+				.append(", password=").append(password)
+				.append(", firstName=").append(firstName)
+				.append(", lastName=").append(lastName)
+				.append(", email=").append(email)
+				.append(", active=").append(active)
+				.append(", phone=").append(phone)
+				.append(", addressId=").append(addressId)
+				.append(", dateOfBirth=").append(dateOfBirth)
+				.append(", roles=").append(roles)
+				.append(", createdDate=").append(createdDate)
+				.append("]")
+				.toString();
 	}
 }
