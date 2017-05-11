@@ -15,22 +15,11 @@ import com.eventzone.cosc412.repository.RoleRepository;
 public class CacheSchedularService {
     @Autowired
     RoleRepository roleRepository;
-	
+
 	@Cacheable("userRoleListCache")
     public Set<UserRole> getAllUserRole() {
 		List<UserRole> userRoles = roleRepository.findAll();
-//		simulateSlowService();
         return  new HashSet<UserRole>(userRoles);
     }
-	
-	 // Don't do this at home
-//    private void simulateSlowService() {
-//        try {
-//            long time = 30000L;
-//            Thread.sleep(time);
-//        } catch (InterruptedException e) {
-//            throw new IllegalStateException(e);
-//        }
-//    }
 
 }

@@ -25,17 +25,17 @@ import com.eventzone.cosc412.repository.UserInfoDAO;
 @Controller
 @RequestMapping("/pages/")
 public class EventController {
-	
+
 	@Autowired
 	private RecordRepository repository;
-	
+
 	@Autowired
 	private UserInfoDAO userRepository;
-	
+
 	@Autowired
 	private AddressDAO addressRepository;
-	
-	
+
+
 	private UserInfo userInfo;
 	private Address address;
 	private RegistrationDTO registration;
@@ -52,64 +52,49 @@ public class EventController {
         model.addAttribute("insertRecord", new Record());
         return "home";
     }
-    
+
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
     public String register(ModelMap model) {
         return resultRegistration(model);
     }
-    
-    
+
+
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addNewUser(@Valid Registration registration, BindingResult result, ModelMap model) {
-       
-        //this.userInfo = userInfo;
-		//this.address = address;
-		//this.model = model;
-		
+
 		System.out.println(registration.toString());
-		//System.out.println(address.toString());
-		
-		
-		
+
+
+
 		 if (!result.hasErrors()) {
-			 
-//			 	this.address = addressRepository.save(address);
-//			 
-//				userInfo.setAddressId(this.address.getAddressId());
-//				userRepository.save(userInfo);
 	            return resultRegistration(model);
 	        }
 	        return "add-user";
-		
-		
-		//return resultRegistration(model);
+
     }
-    
-    
+
+
    // @RequestMapping(method = RequestMethod.GET)
     public String resultRegistration(ModelMap model) {
         //List<Record> records = repository.findAll();
-    	
+
     	userInfo = new UserInfo();
     	userInfo.setFirstName("fn");
     	userInfo.setLastName("fn");
     	userInfo.setEmail("fn@ao.com");
     	userInfo.setPhone("");
-    	
+
     	address = new Address();
     	address.setCity("city");
     	address.setState("coun");
     	address.setStreetAddress("Str");
     	address.setZip("3233");
-    	
-       // model.addAttribute("userInfo", userInfo);
-       // model.addAttribute("address", address);
     	model.addAttribute("registration", new RegistrationDTO());
         return "add-user";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String insertData(ModelMap model, 
+    public String insertData(ModelMap model,
                              @ModelAttribute("insertRecord") @Valid Record record,
                              BindingResult result) {
         if (!result.hasErrors()) {

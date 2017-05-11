@@ -26,24 +26,24 @@ import com.eventzone.cosc412.services.UserService;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	RoleRepository roleRepository;
-	
+
 	@Autowired
 	CacheSchedularService cacheSchedularService;
-	
+
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
-	
+
+
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -54,12 +54,12 @@ public class LoginController {
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid RegistrationDTO registrationDTO, BindingResult bindingResult, @RequestParam(value="newRoles") ArrayList<Long> roles) {
 		ModelAndView modelAndView = new ModelAndView();
 		RegistrationDTO rdto = new RegistrationDTO();
-		
+
 		UserInfo userExists = userService.findUserByEmail(registrationDTO.getEmail());
 		if (userExists != null) {
 			bindingResult
@@ -67,33 +67,26 @@ public class LoginController {
 							"There is already a user registered with the email provided");
 			rdto = registrationDTO;
 		}
-//		if (StringUtils.isBlank(registrationDTO.getReTypePassword()) || registrationDTO.getReTypePassword().equals(registrationDTO.getPassword())) {
-//			bindingResult
-//					.rejectValue("reTypePassword", "error.rePassword",
-//							"The password and its confirm are not the same.");
-//			rdto = registrationDTO;
-//		}
+
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registration");
 			rdto = registrationDTO;
 		} else {
-			
+
 			Set<UserRole> newRoles = roles.stream().map(userRoleId ->roleRepository.findOne(userRoleId)).collect(Collectors.toSet());
 			registrationDTO.setRoles(newRoles);
 			userService.saveRegistrationInfo(registrationDTO);
-		
-			//userService.saveUser(user);
+
 			modelAndView.addObject("successMessage", "User has been registered successfully");
-			//modelAndView.addObject("user", new UserInfo());
 
 			modelAndView.setViewName("registration");
-			
+
 		}
 		rdto.setRoles(cacheSchedularService.getAllUserRole());
 		modelAndView.addObject("registrationDTO", rdto);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value="/admin/home", method = RequestMethod.GET)
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -104,6 +97,6 @@ public class LoginController {
 		modelAndView.setViewName("admin/home");
 		return modelAndView;
 	}
-	
+
 
 }
