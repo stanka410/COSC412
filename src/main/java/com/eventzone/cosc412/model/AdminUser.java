@@ -67,11 +67,7 @@ public class AdminUser {
 
 	@Override
 	public String toString() {
-		Stringbuilder sb = new StringBuilder(100);
-		return sb.append("Customer [customerId=").append(adminUserId)
-				.append(", userId=").append(userId)
-				.append("]")
-				.toString();				
+		return "Customer [customerId=" + adminUserId + ", userId=" + userId + "]";
 	}
   
 }

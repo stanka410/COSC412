@@ -112,14 +112,8 @@ public class School {
 
 	@Override
 	public String toString() {
-		Stringbuilder sb = new Stringbuilder(100);
-		return sb.append("School [schoolId=").append(schoolId)
-				.append(", schooName=").append(schoolName)
-				.append(", schoolAddress=").append(schoolAddress)
-				.append(", phone=").append(phone)
-				.append(", schoolRepId=").append(schoolRepId)
-				.append("]")
-				.toString();
+		return "School [schoolId=" + schoolId + ", schoolName=" + schoolName + ", schoolAddress=" + schoolAddress
+				+ ", phone=" + phone + ", schoolRepId=" + schoolRepId + "]";
 	}
     
  
