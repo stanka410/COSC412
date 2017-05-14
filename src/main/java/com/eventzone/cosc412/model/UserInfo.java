@@ -13,15 +13,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity (name = "USER_INFO")
+@Entity 
+@Table(name = "USER_INFO")
 public class UserInfo {
 
 	@Id
     @GeneratedValue
-
+	@Column(name = "USER_INFO_ID")
 	Long userInfoId;
 	
 	@Column(name = "PASSWORD")
@@ -41,6 +43,9 @@ public class UserInfo {
     
     @Column(name = "PHONE_NUMBER")
     String phone;
+    
+    @Column(name = "ACCOUNT_TYPE")
+    String accountType;
     
     @Column(name = "ADDRESS_ID")
     Long addressId;
@@ -154,17 +159,22 @@ public class UserInfo {
 		this.createdDate = createdDate;
 	}
 
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
 		result = prime * result + active;
 		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
-		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((userInfoId == null) ? 0 : userInfoId.hashCode());
 		return result;
 	}
@@ -178,6 +188,11 @@ public class UserInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		UserInfo other = (UserInfo) obj;
+		if (accountType == null) {
+			if (other.accountType != null)
+				return false;
+		} else if (!accountType.equals(other.accountType))
+			return false;
 		if (active != other.active)
 			return false;
 		if (addressId == null) {
@@ -185,30 +200,10 @@ public class UserInfo {
 				return false;
 		} else if (!addressId.equals(other.addressId))
 			return false;
-		if (dateOfBirth == null) {
-			if (other.dateOfBirth != null)
-				return false;
-		} else if (!dateOfBirth.equals(other.dateOfBirth))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (roles == null) {
-			if (other.roles != null)
-				return false;
-		} else if (!roles.equals(other.roles))
 			return false;
 		if (userInfoId == null) {
 			if (other.userInfoId != null)
@@ -222,7 +217,9 @@ public class UserInfo {
 	public String toString() {
 		return "UserInfo [userInfoId=" + userInfoId + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", email=" + email + ", active=" + active + ", phone=" + phone
-				+ ", addressId=" + addressId + ", dateOfBirth=" + dateOfBirth + ", roles=" + roles + ", createdDate="
-				+ createdDate + "]";
+				+ ", accountType=" + accountType + ", addressId=" + addressId + ", dateOfBirth=" + dateOfBirth
+				+ ", roles=" + roles + ", createdDate=" + createdDate + "]";
 	}
+
+	
 }

@@ -7,4 +7,6 @@ import com.eventzone.cosc412.model.UserInfo;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<UserInfo, Long> {
 	 UserInfo findByEmail(String email);
+
+	UserInfo findUserByUserInfoId(Long userInfoId);
 }

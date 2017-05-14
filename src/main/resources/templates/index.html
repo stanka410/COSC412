@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>VenEdu</title>
+	<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="stylesheet" 
+	th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" 
+	th:href="@{/css/plugins.css}" />
+<link rel="stylesheet" 
+	th:href="@{/css/opensans-web-font.css}" />
+	<link rel="stylesheet" 
+	th:href="@{/css/montserrat-web-font.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		<nav class="navbar navbar-default navbar-pf navbar-fixed-top" style="padding-bottom: 10px;" role="navigation" xmlns:th="http://www.thymeleaf.org">
+<!-- <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+        <nav class="mainmenu navbar navbar-default navbar-fixed-top"> -->
+            <div class="container">
+			
+			<div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                      	<span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+					
+					<div class="brand-bg">
+                    	<a class="navbar-brand" href="@{/}"><img src="/images/logo.png" alt="VenEdu Logo" /></a>
+					</div>
+                </div>
+                
+          <div class="navbar-collapse collapse">
+          
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" th:href="@{/}">Home</a></li>
+            <li><a href="#" th:href="@{/events}">Events</a></li>
+ 			<li><a href="#" th:href="@{/rent}">Rent Facility</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/register-school-rep}">Register As Provider</a>
+            </li>
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/registration}">Register</a>
+            </li>
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">Sign in</a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+            <span sec:authentication="name">Bob</span> 
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+              <a href="/logout" th:href="@{/logout}">Logout</a>
+            </li>
+            
+          </ul>
+        </div>
+				</div>
+				
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <!--Home page style-->
+        <header class="home-bg">
+		<div class="overlay-img">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="header-details">
+							<h1>reserve venues<i class="fa fa-circle"></i><br />find events<i class="fa fa-circle"></i><br />support public education<i class="fa fa-circle"></i></h1>
+							<p>All in the same convenient location.</p>
+							<button class="btn btn-default">Read More</button>
+						</div>
+					</div>
+					
+
+				</div>
+			</div>
+		</div>	
+        </header>
+
+        <!-- Sections -->
+        <section id="promotion-area" class="sections">
+            <div class="container">
+                <!-- Example row of columns -->
+                <div class="row">
+					<div class="col-sm-4 col-sm-12 col-xs-12">
+						<div class="promotion">
+						
+						<h1>Rent<br /> a space<i class="fa fa-circle"></i></h1>
+						<form method="post" action="searchfacilities.php">
+						<fieldset>
+						<legend>Search Facilities By Zip Code</legend>
+						<input type="text" value="enter your zip code" name="searchzip" id="searchzip" />
+						<input type="submit" />
+						</fieldset>
+						</form>
+
+						</div>
+						
+					</div>
+					
+					<div class="col-sm-4 col-sm-12 col-xs-12">
+						<div class="promotion">
+						
+						<h1>Find<br />an event<i class="fa fa-circle"></i></h1>
+						<form method="post" action="searchevents.php">
+						<fieldset>
+						<legend>Search Events By Date</legend>
+						<input type="Date" name="searchdate" id="searchdate" />
+						<input type="submit" />
+						</fieldset>
+						</form>
+						
+						</div>
+					</div>
+
+                </div>
+            </div> <!-- /container -->       
+        </section>
+		
+		
+		<section id="portfolio-area" class="sections">
+            <div class="container">
+                <!-- Example row of columns -->
+                <div class="row">
+					<div class="col-sm-6 col-sm-12 col-xs-12">
+						<div class="portfolio">
+							<img src="/images/computer.png" alt="" />
+						</div>
+					</div>
+					
+					<div class="col-sm-5 col-sm-12 col-xs-12">
+						<div class="portfolio">
+						
+						<div class="item">
+						<h1>This<i class="fa fa-circle"></i></h1>
+						<h5>is placeholder text</h5>
+						<p>It will probably be deleted.</p>
+						<p>But I want to keep it as an example for now.</p>
+						<a href="#"><h4>more<span><i class="fa fa-long-arrow-right"></i></span></h4></a>
+						</div>
+						
+						</div>
+					</div>
+
+                </div>
+            </div> <!-- /container -->       
+        </section>
+		
+		<div class="scroll-top">
+		
+			<div class="scrollup">
+				<i class="fa fa-angle-double-up"></i>
+			</div>
+			
+		</div>
+	
+        <!--Footer-->
+        <footer>
+            <div class="container">
+			<hr />
+            	<div class="row">
+				
+            		<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="social-network">
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-instagram"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-google-plus"></i></a>
+						</div>
+					</div>
+					
+            		<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="copyright">
+							<p>Copyright © 2016 VenEdu.com. All rights reserved.</p>
+						</div>
+					</div>
+					
+            	</div>
+            </div>
+        </footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/plugins.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+    </body>
+</html>

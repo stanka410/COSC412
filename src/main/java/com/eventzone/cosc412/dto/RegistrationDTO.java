@@ -1,6 +1,9 @@
 package com.eventzone.cosc412.dto;
 
+import java.util.Date;
 import java.util.Set;
+
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -22,6 +25,9 @@ public class RegistrationDTO {
 	@Email(message = "Please supply your email address")
 	@NotEmpty(message = "Please supply a valid email address")
     String email;
+	
+	@NotNull
+	Date dateOfBirth;
 
 	String phone;
     
@@ -34,8 +40,27 @@ public class RegistrationDTO {
     String zip;
     
     Set<UserRole> roles;
+    
+    String schoolName;
+    String schoolPhone;
 
 	
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
+	public String getSchoolPhone() {
+		return schoolPhone;
+	}
+
+	public void setSchoolPhone(String schoolPhone) {
+		this.schoolPhone = schoolPhone;
+	}
+
 	public Set<UserRole> getRoles() {
 		return roles;
 	}
@@ -114,5 +139,13 @@ public class RegistrationDTO {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 }

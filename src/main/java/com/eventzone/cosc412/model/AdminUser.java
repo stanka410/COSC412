@@ -10,10 +10,9 @@ import javax.persistence.SequenceGenerator;
 @Entity (name = "ADMIN_USER")
 public class AdminUser {
 
-
-	@Id
+    @Id
     @GeneratedValue
-	Long adminUserId;
+    Long adminUserId;
     
     @Column(name = "USER_ID")
     Long userId;

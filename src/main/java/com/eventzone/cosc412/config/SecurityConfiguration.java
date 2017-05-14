@@ -18,6 +18,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+    CustomSuccessHandler customSuccessHandler;
 
 	@Autowired
 	private DataSource dataSource;
@@ -42,21 +45,58 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.
-			authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/login").permitAll()
-				.antMatchers("/registration").permitAll()
-				.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-				.authenticated().and().csrf().disable().formLogin()
-				.loginPage("/login").failureUrl("/login?error=true")
-				.defaultSuccessUrl("/admin/home")
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/access-denied");
+		http.authorizeRequests()
+		.antMatchers("/").permitAll()
+        .antMatchers("/", "/index").permitAll()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/events").permitAll()
+		.antMatchers("/registration").permitAll()
+		.antMatchers("/search-facility").permitAll()
+		.antMatchers("/make-payment").permitAll()
+        .antMatchers("/register-school-rep").permitAll()
+        .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
+        .antMatchers("/schoolRep/**").hasAnyAuthority("SCHOOLREP", "ADMIN").anyRequest().authenticated()
+        .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
+        .usernameParameter("email").passwordParameter("password")
+        .and().csrf()
+        .and().logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/").and().exceptionHandling()
+		.accessDeniedPage("/error");
+        //.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+		
+//		http.
+//			authorizeRequests()
+//				.antMatchers("/").permitAll()
+//				.antMatchers("/schoolRep/**").hasAuthority("SCHOOLREP").anyRequest()
+//				.authenticated().and().csrf().disable().formLogin()
+//				.loginPage("/login").failureUrl("/login?error=true")
+//				.defaultSuccessUrl("/schoolRep/home")
+//				.usernameParameter("email")
+//				.passwordParameter("password")
+//				.and().logout()
+//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//				.logoutSuccessUrl("/").and().exceptionHandling()
+//				.accessDeniedPage("/access-denied");
+//		
+//		http.
+//		authorizeRequests()
+//			.antMatchers("/").permitAll()
+//			.antMatchers("/login").permitAll()
+//			.antMatchers("/registration").permitAll()
+//			.antMatchers("/register-school-rep").permitAll()
+//			.antMatchers("/search-facility").permitAll()
+//			.antMatchers("/add-facility").permitAll()
+//			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+//			.authenticated().and().csrf().disable().formLogin()
+//		o	.loginPage("/login").failureUrl("/login?error=true")
+//			.defaultSuccessUrl("/admin/home")
+//			.usernameParameter("email")
+//			.passwordParameter("password")
+//			.and().logout()
+//			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//			.logoutSuccessUrl("/").and().exceptionHandling()
+//			.accessDeniedPage("/access-denied");
 	}
 	
 	@Override

@@ -5,3 +5,18 @@
 }
 
 #success_message{ display: none;}
+
+.center_div{
+    margin: 0 auto;
+    width:80% /* value of your choice which suits your alignment */
+}
+
+.section_div
+{
+	margin-top: 100px;
+}
+
+.page-header{
+	margin-top: 60px !important;
+	
+}

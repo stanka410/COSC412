@@ -5,10 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity (name = "USER_ROLE")
-public class UserRole {
+@Entity 
+@Table (name="USER_ROLE")
+public class UserRole implements  Comparable<UserRole>{
 
 	@Id
     @GeneratedValue
@@ -84,9 +88,17 @@ public class UserRole {
 	}
 
 
+
 	@Override
 	public String toString() {
-		return "UserType [userRoleId=" + userRoleId + ", userRole=" + userRole + "]";
+		return "UserRole [userRoleId=" + userRoleId + ", userRole=" + userRole + ", roleShortDescription="
+				+ roleShortDescription + "]";
+	}
+
+
+	@Override
+	public int compareTo(UserRole o) {
+		return this.roleShortDescription.compareTo(o.roleShortDescription);
 	}
  
 }

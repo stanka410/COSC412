@@ -6,14 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity (name = "SCHOOL")
+@Entity 
+@Table (name = "SCHOOL")
 public class School {
 
 	@Id
     @GeneratedValue
-   
-
 	@Column(name = "SCHOOL_ID")
 	Long schoolId;
 	
@@ -21,14 +21,14 @@ public class School {
     @Column(name = "SCHOOL_NAME")
     String schoolName;
     
-    @Column(name = "SCHOOL_ADDRESS")
-    String schoolAddress;
+    @Column(name = "SCHOOL_ADDRESS_ID")
+    Long schoolAddressId;
     
     @Column(name = "PHONE")
-    int phone;
+    String phone;
     
     @Column(name = "SCHOOL_REP_ID")
-    String schoolRepId;
+    Long schoolRepId;
 
 	public Long getSchoolId() {
 		return schoolId;
@@ -46,35 +46,30 @@ public class School {
 		this.schoolName = schoolName;
 	}
 
-	public String getSchoolAddress() {
-		return schoolAddress;
-	}
+	
 
-	public void setSchoolAddress(String schoolAddress) {
-		this.schoolAddress = schoolAddress;
-	}
 
-	public int getPhone() {
-		return phone;
-	}
-
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
-
-	public String getSchoolRepId() {
+	public Long getSchoolRepId() {
 		return schoolRepId;
 	}
 
-	public void setSchoolRepId(String schoolRepId) {
+	public void setSchoolRepId(Long schoolRepId) {
 		this.schoolRepId = schoolRepId;
+	}
+
+	public Long getSchoolAddressId() {
+		return schoolAddressId;
+	}
+
+	public void setSchoolAddressId(Long schoolAddressId) {
+		this.schoolAddressId = schoolAddressId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + phone;
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((schoolId == null) ? 0 : schoolId.hashCode());
 		result = prime * result + ((schoolName == null) ? 0 : schoolName.hashCode());
 		result = prime * result + ((schoolRepId == null) ? 0 : schoolRepId.hashCode());
@@ -90,7 +85,10 @@ public class School {
 		if (getClass() != obj.getClass())
 			return false;
 		School other = (School) obj;
-		if (phone != other.phone)
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
 			return false;
 		if (schoolId == null) {
 			if (other.schoolId != null)
@@ -110,11 +108,21 @@ public class School {
 		return true;
 	}
 
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
-		return "School [schoolId=" + schoolId + ", schoolName=" + schoolName + ", schoolAddress=" + schoolAddress
+		return "School [schoolId=" + schoolId + ", schoolName=" + schoolName + ", schoolAddressId=" + schoolAddressId
 				+ ", phone=" + phone + ", schoolRepId=" + schoolRepId + "]";
 	}
-    
+
+
  
 }

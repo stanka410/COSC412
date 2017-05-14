@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity (name = "ADDRESS")
+@Entity 
+@Table (name = "ADDRESS")
 public class Address {
 
 	@Id
@@ -26,6 +28,17 @@ public class Address {
     
     @Column(name = "ZIP")
     String zip;
+    
+//    @Column(name = "ADDRESS_TYPE")
+//    String addressType;
+//
+//	public String getAddressType() {
+//		return addressType;
+//	}
+//
+//	public void setAddressType(String addressType) {
+//		this.addressType = addressType;
+//	}
 
 	public Long getAddressId() {
 		return addressId;
@@ -118,7 +131,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [addressId=" + addressId + ", streetAddress=" + streetAddress + ", city=" + city + ", county="
+		return "Address [addressId=" + addressId + ", streetAddress=" + streetAddress + ", city=" + city + ", state="
 				+ state + ", zip=" + zip + "]";
 	}
     

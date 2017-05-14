@@ -4,111 +4,50 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout"
-    th:with="title='Registration'"
+    th:with="title='Registration Form'"
 	>
 	<th:block layout:fragment="content">
-
 <div class="container">
-	<form  id="contact_form" autocomplete="off" action="#" th:action="@{/registration}"
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/en-gb.js"></script>
+	<form  id="school_rep_form" autocomplete="off" action="#" th:action="@{/register-school-rep}"
 						th:object="${registrationDTO}" method="post" class="well form-horizontal" 
 						role="form">
 		<fieldset>
-			<legend>User Registration</legend>
+				<!-- Text input-->
+			<h3>Enter School's Information</h3>
 			
-						
 						<!-- Success message -->
 			<div align="center" th:if="${successMessage}">
 				<span class="alert alert-success" role="alert" th:utext="${successMessage}"></span>
 				<br/><br/>
 			</div>
-			<!-- Text input-->
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="firstNameId">First Name</label>  
+				<label class="col-md-4 control-label" for="schoolNameId">School Name</label>  
 				<div class="col-md-4 inputGroupContainer">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="firstNameId" type="text" th:field="*{firstName}" placeholder="First Name"
+						<input id="firstNameId" type="text" th:field="*{schoolName}" placeholder="School Name"
 								class="form-control" />
-						<label  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="lastNameId" >Last Name</label> 
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="lastNameId"	 type="text" th:field="*{lastName}"
-								placeholder="Last Name" class="form-control" /> 
-							<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="emailId">E-Mail</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input id="emailId" type="text" th:field="*{email}" placeholder="Email"
-								class="form-control" /> <label
-								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+						<label  th:if="${#fields.hasErrors('schoolName')}" th:errors="*{schoolName}"
 								class="validation-message"></label>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="passwordId">Password</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input id="passwordId" type="password" th:field="*{password}"
-								placeholder="Password" class="form-control" /> <label
-								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			
-			
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="reTypePasswordId">Confirm Password</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input id="reTypePasswordId" type="password" name="reTypePassword"
-								placeholder="Confirm Password" class="form-control" /> 
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="dobId">Date of Birth</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group date" id="datePickerId">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						<input type="text" class="form-control" id="dobId" placeholder="mm/dd/yyyy" th:field="*{dateOfBirth}" />
-						<label
-								th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="phoneId">Phone #</label>  
+				<label class="col-md-4 control-label" for="schoolPhoneId">Phone #</label>  
 				<div class="col-md-4 inputGroupContainer">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-						<input type="text" class="form-control" id="phoneId" placeholder="(845)555-1212" th:field="*{phone}" />
+						<input type="text" class="form-control" id="schoolPhoneId" placeholder="(646) 555-1212" th:field="*{schoolPhone}" />
 					</div>
 				</div>
 			</div>
-			<!-- Text input-->
+			
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="streetAddressId">Street Address</label>  
 				<div class="col-md-4 inputGroupContainer">
@@ -200,7 +139,96 @@
 						<input type="text" class="form-control" id="zipId" placeholder="Enter Zip" th:field="*{zip}"/>					</div>
 				</div>
 			</div>
+		<hr />
+			<h3>Enter School Representative's Information</h3>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="firstNameId">First Name</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="firstNameId" type="text" th:field="*{firstName}" placeholder="First Name"
+								class="form-control" />
+						<label  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+								class="validation-message"></label>
+					</div>
+				</div>
+			</div>
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="lastNameId" >Last Name</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="lastNameId"	 type="text" th:field="*{lastName}"
+								placeholder="Last Name" class="form-control" /> 
+							<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+								class="validation-message"></label>
+					</div>
+				</div>
+			</div>
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="emailId">E-Mail</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						<input id="emailId" type="text" th:field="*{email}" placeholder="Email"
+								class="form-control" /> <label
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+								class="validation-message"></label>
+					</div>
+				</div>
+			</div>
 			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="passwordId">Password</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input id="passwordId" type="password" th:field="*{password}"
+								placeholder="Password" class="form-control" /> <label
+								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+								class="validation-message"></label>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="reTypePasswordId">Confirm Password</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input id="reTypePasswordId" type="password" name="reTypePassword"
+								placeholder="Confirm Password" class="form-control" /> 
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="dobId">Date of Birth</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group date" id="datePickerId">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						<input type="text" class="form-control" id="dobId" placeholder="mm/dd/yyyy" th:field="*{dateOfBirth}" />
+						<label
+								th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"
+								class="validation-message"></label>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="phoneId">Phone #</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						<input type="text" class="form-control" id="phoneId" placeholder="(845)555-1212" th:field="*{phone}" />
+					</div>
+				</div>
+			</div>
+			<!-- Text input-->
 			
 			<div class="form-group" sec:authorize="hasRole('ADMIN')">
 							<fieldset>

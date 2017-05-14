@@ -10,9 +10,9 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Customer {
 
-	@Id
+    @Id
     @GeneratedValue
-    Long customerId;
+	Long customerId;
     
     @Column(name = "USER_ID")
     Long userId;

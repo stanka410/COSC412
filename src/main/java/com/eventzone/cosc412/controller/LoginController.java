@@ -36,7 +36,13 @@ public class LoginController {
 	@Autowired
 	CacheSchedularService cacheSchedularService;
 	
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
+	public ModelAndView homePageNew(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
@@ -44,6 +50,12 @@ public class LoginController {
 	}
 	
 	
+	@RequestMapping(value="/error", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView error(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("error");
+		return modelAndView;
+	}
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -56,6 +68,56 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public ModelAndView createNewUser(@Valid RegistrationDTO registrationDTO, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView();
+		RegistrationDTO rdto = new RegistrationDTO();
+		
+		UserInfo userExists = userService.findByEmailAndRole(registrationDTO.getEmail(), "USER");
+		if (userExists != null) {
+//			Set<UserRole> userRoles = userExists.getRoles();
+//			for(UserRole userRole : userRoles)
+//			{
+//				if("USER".equals(userRole.getUserRole()) || "CUSTOMER".equals(userRole.getUserRole()))
+//				{
+					bindingResult
+					.rejectValue("email", "error.user",
+							"There is already a user registered with the email provided");
+					rdto = registrationDTO;
+//					break;
+//				}
+//			}
+		}
+//		if (StringUtils.isBlank(registrationDTO.getReTypePassword()) || registrationDTO.getReTypePassword().equals(registrationDTO.getPassword())) {
+//			bindingResult
+//					.rejectValue("reTypePassword", "error.rePassword",
+//							"The password and its confirm are not the same.");
+//			rdto = registrationDTO;
+//		}
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("registration");
+			rdto = registrationDTO;
+		} else {
+//			if(!roles.isEmpty())
+//			{
+//				Set<UserRole> newRoles = roles.stream().map(userRoleId ->roleRepository.findOne(userRoleId)).collect(Collectors.toSet());
+//				registrationDTO.setRoles(newRoles);
+//			}
+			userService.saveRegistrationInfo(registrationDTO, "USER");
+		
+			//userService.saveUser(user);
+			modelAndView.addObject("successMessage", "User has been registered successfully");
+			//modelAndView.addObject("user", new UserInfo());
+
+			modelAndView.setViewName("registration");
+			
+		}
+		rdto.setRoles(cacheSchedularService.getAllUserRole());
+		modelAndView.addObject("registrationDTO", rdto);
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value = "admin/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid RegistrationDTO registrationDTO, BindingResult bindingResult, @RequestParam(value="newRoles") ArrayList<Long> roles) {
 		ModelAndView modelAndView = new ModelAndView();
 		RegistrationDTO rdto = new RegistrationDTO();
@@ -77,10 +139,12 @@ public class LoginController {
 			modelAndView.setViewName("registration");
 			rdto = registrationDTO;
 		} else {
-			
-			Set<UserRole> newRoles = roles.stream().map(userRoleId ->roleRepository.findOne(userRoleId)).collect(Collectors.toSet());
-			registrationDTO.setRoles(newRoles);
-			userService.saveRegistrationInfo(registrationDTO);
+			if(!roles.isEmpty())
+			{
+				Set<UserRole> newRoles = roles.stream().map(userRoleId ->roleRepository.findOne(userRoleId)).collect(Collectors.toSet());
+				registrationDTO.setRoles(newRoles);
+			}
+			userService.saveRegistrationInfo(registrationDTO, "USER");
 		
 			//userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
@@ -105,5 +169,39 @@ public class LoginController {
 		return modelAndView;
 	}
 	
+	
+	
+	@RequestMapping(value="/admin/home", method = RequestMethod.POST)
+	public ModelAndView homePage(){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+		modelAndView.setViewName("admin/home");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/schoolRep/home", method = RequestMethod.GET)
+	public ModelAndView landing(){
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserInfo user = userService.findUserByEmail(auth.getName());
+		modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+		if("SCHOOLREP".equals(user.getAccountType()))
+		{
+			modelAndView.setViewName("schoolRep/home");
+		}
+		else if("ADMIN".equals(user.getAccountType()))
+		{
+			modelAndView.setViewName("admin/home");
+		}
+		else
+		{
+			modelAndView.setViewName("/home");
+		}
+		return modelAndView;
+	}
 
 }

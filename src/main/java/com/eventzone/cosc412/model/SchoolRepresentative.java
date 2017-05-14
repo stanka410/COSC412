@@ -10,9 +10,8 @@ import javax.persistence.SequenceGenerator;
 @Entity(name="SCHOOL_REPRESENTATIVE")
 public class SchoolRepresentative {
 
-	@Id
+    @Id
     @GeneratedValue
-  
     Long schoolRepId;
     
     @Column(name = "USER_ID")

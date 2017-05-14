@@ -9,26 +9,67 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form th:action="@{/registration}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-	</form>	
-	
-	<div class="container">
-		<img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-		<form th:action="@{/login}" method="POST" class="form-signin">
-			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br/>
-			 
-			<input type="text" id="email" name="email"  th:placeholder="Email"
-				class="form-control" /> <br/> 
-			<input type="password"  th:placeholder="Password"
-				id="password" name="password" class="form-control" /> <br /> 
+ <header>
+<nav class="navbar navbar-default navbar-pf navbar-fixed-top" style="padding-bottom: 10px;" role="navigation" xmlns:th="http://www.thymeleaf.org">
+            <div class="container">
+			
+			<div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                      	<span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+					
+					<div class="brand-bg">
+                    	<a class="navbar-brand" href="@{/}"><img src="/images/logo.png" alt="VenEdu Logo" /></a>
+					</div>
+                </div>
+                
+                <div class="navbar-collapse collapse" style="padding-top: 15px !important;">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" th:href="@{/}">Home</a></li>
+ 			<li><a href="#" th:href="@{/rent}">Rent Facility</a></li>
+ 			<li><a href="#" th:href="@{/events}">Events</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/registration}">Register</a>
+            </li>
+            <li th:if="${#authorization.expression('!isAuthenticated()')}">
+              <a href="/signin" th:href="@{/signin}">Sign in</a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+              <a href="/logout" th:href="@{/logout}">Logout</a>
+            </li>
+          </ul>
+        </div>
+				</div>
 				
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-		</form>
-	</div>
+            </div><!-- /.container-fluid -->
+
+</nav>
+</header>
+<br />
+<section style="margin-top: 100px;">
+		<div class="container">
+			<form th:action="@{/login}" method="POST" class="form-signin">
+				<h3 class="form-signin-heading" th:text="Welcome"></h3>
+				<br/>
+				 
+				<input type="text" id="email" name="email"  th:placeholder="Email"
+					class="form-control" /> <br/> 
+				<input type="password"  th:placeholder="Password"
+					id="password" name="password" class="form-control" /> <br /> 
+					
+				<div align="center" th:if="${param.error}">
+					<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+			</form>
+		</div>
+</section>
 </body>
 </html>
