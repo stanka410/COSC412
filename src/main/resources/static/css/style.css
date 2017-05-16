@@ -422,16 +422,37 @@ input:-ms-input-placeholder {
 	color:#c8ced0;
 }
 
-.mainmenu .navbar-nav li a i{
+ .navbar-nav li a i{
 	color:#fa5c65;
 	font-size:18px;
 	transition:.3s ease-in-out;
 }
-.mainmenu .navbar-nav li a i:hover{
+.navbar-nav li a i:hover{
 	color:white;
 }
 
+.nav>li:hover{
+   background-color: #05919F;
+   font-weight: bold;
+   color:white;
+}
 
+.nav>li>a:hover{
+   background-color: #05919F;
+   font-weight: bold;
+   color:white !important;
+}
+
+.dropdown-menu>li:hover{
+	background-color: #05919F;
+	color:white;
+}
+
+.dropdown-menu>li>a:hover{
+	background-color: #05919F;
+	 font-weight: bold;
+	   color:white !important;
+}
 .home-bg .header-details{
 	padding-top:220px;
 	color:#314a5b;

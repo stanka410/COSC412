@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
 	>
-<head>
-	<title>Spring Security Tutorial</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	   <link rel="stylesheet" th:href="@{/css/style.css}" />
-  	
+<head xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8"/>
+    <title>Facility Management</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+				      <link rel="stylesheet" th:href="@{/css/style.css}" />
+		
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+<script type="text/javascript" th:src="@{/js/utility.js}"></script>
+	
 </head>
 <body>
- <header>
 <nav class="navbar navbar-default navbar-pf navbar-fixed-top" style="padding-bottom: 10px;" role="navigation">
          <!-- <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
             <nav class="mainmenu navbar navbar-default navbar-fixed-top"> -->
@@ -72,26 +81,61 @@
          </div>
          <!-- /.container-fluid -->
       </nav>
-    </header>
-    <section class="section_div">
-    </section>
-	<h1 th:text="${errorCode}">500</h1>
-	<p th:text="${errorMessage}">java.lang.NullPointerException</p>
-	
-	<h1 th:text="#{error_title}">Your request cannot be processed <span>:(</span></h1>
-
-    <p th:text="#{error_subtitle}">Sorry, an error has occurred.</p>
-
-    <span th:text="#{error_status}">Status:</span>&nbsp;<span th:text="${error}"></span>&nbsp;(<span th:text="${error}"></span>)<br/>
-    <span th:if="${!#strings.isEmpty(message)}">
-        <span th:text="#{error_message}">Message:</span>&nbsp;<span th:text="${message}"></span><br/>
-    </span>
-
-   <!--  <script th:inline="text">
-        /*<![CDATA[*/
-        var GOOG_FIXURL_LANG = '[[${#locale.language}]]', GOOG_FIXURL_SITE = location.host;
-        /*]]>*/
-    </script>
-    <script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script> -->
-</body>
+<section class="section_div">
+<div class="page-header" style="padding-top: 20px; padding-left: 20px; color: 008F9E;" xmlns:th="http://www.thymeleaf.org">
+    <h3>Facility</h3>
+</div>
+</section>
+<div class="container">
+<div class="well form-horizontal" >
+	<fieldset>
+			<legend>Facilities Available for Rent</legend>
+			<div class="span12">
+			<table id="myTableId" dt:table="true" class="table table-striped">
+      <thead>
+            <tr>
+               <th>Facility Name</th>
+				<th>Description</th>
+                <th>Location</th>
+                <th>Price Per Hour ($)</th>
+                <th>School Name</th>
+                <th>School Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+               <th>Facility Name</th>
+				<th>Description</th>
+                <th>Location</th>
+                <th>Price Per Hour ($)</th>
+                <th>School Name</th>
+                <th>School Address</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr th:each="facility : ${facilityDTOList}">
+                <td th:text="${facility?.facilityName}"></td>
+                <td th:text="${facility?.facilityDescription}"></td>
+                <td th:text="${facility?.facilityLocation}"></td>
+                <td th:text="${facility?.pricePerHour}"></td>
+                <td th:text="${facility?.schoolName}"></td>
+                <td th:text="${facility?.schoolAddress}"></td>
+                <td>  
+                	<div sec:authorize="isAuthenticated()" style="float: left;">
+					  <form method="POST" th:action="@{/rent-facility(facilityId=${facility?.facilityId})}">
+				      <button type="submit" class="btn btn-info">Rent</button>
+				    </form> 
+				</div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+			
+	</fieldset>		
+	</div>
+</div>
+	</body>
 </html>

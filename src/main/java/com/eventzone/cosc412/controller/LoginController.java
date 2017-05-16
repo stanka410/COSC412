@@ -36,12 +36,15 @@ public class LoginController {
 	@Autowired
 	CacheSchedularService cacheSchedularService;
 	
+	
 	@RequestMapping(value={"/", "/index"}, method = RequestMethod.GET)
 	public ModelAndView homePageNew(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
+	
+	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -56,6 +59,7 @@ public class LoginController {
 		modelAndView.setViewName("error");
 		return modelAndView;
 	}
+	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration(){
 		ModelAndView modelAndView = new ModelAndView();

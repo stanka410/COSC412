@@ -8,3 +8,26 @@
     margin: 0 auto;
     width:80% /* value of your choice which suits your alignment */
 }
+
+.nav>li:hover{
+   background-color: #05919F;
+   font-weight: bold;
+   color:white;
+}
+
+.nav>li>a:hover{
+   background-color: #05919F;
+   font-weight: bold;
+   color:white !important;
+}
+
+.dropdown-menu>li:hover{
+	background-color: #05919F;
+	color:white;
+}
+
+.dropdown-menu>li>a:hover{
+	background-color: #05919F;
+	 font-weight: bold;
+	   color:white !important;
+}

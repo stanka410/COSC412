@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout"
+    th:with="title='Add Events'"
+	>
+	<th:block layout:fragment="content">
+<div class="container">
+
+	<form  id="add-events-form" autocomplete="off" action="#" th:action="@{/admin/add-events}"
+						th:object="${eventDTO}" method="post" class="well form-horizontal" 
+						role="form">
+		<fieldset>
+			<legend>Add Event</legend>
+			
+						<!-- Success message -->
+			<div align="center" th:if="${successMessage}">
+				<span class="alert alert-success" role="alert" th:utext="${successMessage}"></span>
+				<br/><br/>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="eventNameId">Event Name</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="eventNameId" type="text" th:field="*{eventName}" placeholder="Event Name"
+								class="form-control" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="organizedById">Organized By</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="organizedById" type="text" th:field="*{organizedBy}" placeholder="Organized By"
+								class="form-control" />
+					</div>
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="eventDescriptionId" >Event Description</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="eventDescriptionId"	 type="text" th:field="*{eventDescription}"
+								placeholder="Event Description" class="form-control" /> 
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="eventDateFromId">Event Date From</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group date" id="eventDatePickerFromId">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						<input type="text" class="form-control" id="eventDateFromId" placeholder="mm/dd/yyyy" th:field="*{eventDateFrom}" />
+					</div>
+				</div>
+				
+			</div>
+							<div class="form-group">
+				<label class="col-md-4 control-label" for="eventTimeFromId">Event Time From</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group date" id="eventTimeFromId">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						<input type="text" class="form-control" id="eventTimeFromId" placeholder="hh:MM AM" th:field="*{TimeFrom}" />
+					</div>
+				</div>
+				
+			</div>
+			
+			
+						<div class="form-group">
+				<label class="col-md-4 control-label" for="eventDateToId">Event Date To</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group date" id="eventDatePickerToId">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						<input type="text" class="form-control" id="eventDateToId" placeholder="mm/dd/yyyy" th:field="*{eventDateTo}" />
+					</div>
+				</div>
+				
+			</div>
+			
+						<div class="form-group">
+				<label class="col-md-4 control-label" for="eventTimeToId">Event Time To</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group date" id="eventTimeToId">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						<input type="text" class="form-control" id="eventTimeToId" placeholder="hh:MM AM" th:field="*{TimeTo}" />
+					</div>
+				</div>
+				
+			</div>
+		
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="eventLocationId">Event Location</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input id="eventLocationId" type="text" th:field="*{eventLocation}"
+								placeholder="EventLocation" class="form-control" /> 
+					</div>
+				</div>
+			</div>
+			
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="eventTypeId">Event Type</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						<input type="text" class="form-control" id="eventTypeId" placeholder="Event type" th:field="*{eventType}" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="pricePerTicketId">Price Per Ticket</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						<input type="text" class="form-control" id="pricePerTicketId" placeholder="Price Per Ticket" th:field="*{price}" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="totalTicketId">Total number of Tickets</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						<input type="text" class="form-control" id="totalTicketId" placeholder="Total number of Tickets" th:field="*{totalTicketRemaining}" />
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="zipId">Zip Code</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+						<input type="text" class="form-control" id="zipId" placeholder="Enter Zip" th:field="*{zipCode}"/>					</div>
+				</div>
+			</div>
+			
+
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label"></label>
+				<div class="col-md-4">
+					<button type="submit" class="btn btn-primary btn-block">Submit</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
+</th:block>
+</html>

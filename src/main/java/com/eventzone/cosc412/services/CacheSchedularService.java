@@ -1,5 +1,6 @@
 package com.eventzone.cosc412.services;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,10 @@ public class CacheSchedularService {
 	@Cacheable("userRoleListCache")
     public Set<UserRole> getAllUserRole() {
 		List<UserRole> userRoles = roleRepository.findAll();
+		Collections.sort(userRoles);
+
 //		simulateSlowService();
+		
         return  new HashSet<UserRole>(userRoles);
     }
 	

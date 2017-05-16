@@ -1,6 +1,7 @@
 package com.eventzone.cosc412.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,9 +39,34 @@ public class Events {
     @Column(name = "TOTAL_SEATING_CAPACITY")
     String totalSeatingCapacity;
     
-    @Column(name = "EVENT_DATE_TIME")
-    Timestamp eventDateTime;
+    @Column(name = "EVENT_DATE_FROM")
+    Date eventDateFrom;
     
+    @Column(name = "EVENT_DATE_TO")
+    Date eventDateTo;
+    
+    @Column(name = "EVENT_TIME_FROM")
+    String eventTimeFrom;
+    
+    @Column(name = "EVENT_TIME_TO")
+    String eventTimeTo;
+    
+	public String getEventTimeFrom() {
+		return eventTimeFrom;
+	}
+
+	public void setEventTimeFrom(String eventTimeFrom) {
+		this.eventTimeFrom = eventTimeFrom;
+	}
+
+	public String getEventTimeTo() {
+		return eventTimeTo;
+	}
+
+	public void setEventTimeTo(String eventTimeTo) {
+		this.eventTimeTo = eventTimeTo;
+	}
+
 	@Column(name = "TotalTicketRemaining")
     Integer totalTicketRemaining;
     
@@ -104,13 +130,6 @@ public class Events {
 		this.totalSeatingCapacity = totalSeatingCapacity;
 	}
 
-	public Timestamp getEventDateTime() {
-		return eventDateTime;
-	}
-
-	public void setEventDateTime(Timestamp eventDateTime) {
-		this.eventDateTime = eventDateTime;
-	}
 
 	public Integer getTotalTicketRemaining() {
 		return totalTicketRemaining;
@@ -169,11 +188,26 @@ public class Events {
 		this.filePath = filePath;
 	}
 
+	public Date getEventDateFrom() {
+		return eventDateFrom;
+	}
+
+	public void setEventDateFrom(Date eventDateFrom) {
+		this.eventDateFrom = eventDateFrom;
+	}
+
+	public Date getEventDateTo() {
+		return eventDateTo;
+	}
+
+	public void setEventDateTo(Date eventDateTo) {
+		this.eventDateTo = eventDateTo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((eventDateTime == null) ? 0 : eventDateTime.hashCode());
 		result = prime * result + ((eventDesciption == null) ? 0 : eventDesciption.hashCode());
 		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
 		result = prime * result + ((eventLocation == null) ? 0 : eventLocation.hashCode());
@@ -191,11 +225,6 @@ public class Events {
 		if (getClass() != obj.getClass())
 			return false;
 		Events other = (Events) obj;
-		if (eventDateTime == null) {
-			if (other.eventDateTime != null)
-				return false;
-		} else if (!eventDateTime.equals(other.eventDateTime))
-			return false;
 		if (eventDesciption == null) {
 			if (other.eventDesciption != null)
 				return false;
@@ -226,11 +255,13 @@ public class Events {
 
 	@Override
 	public String toString() {
-		return "Event [eventId=" + eventId + ", eventName=" + eventName + ", organizedBy=" + organizedBy
-				+ ", eventLocation=" + eventLocation + ", eventDesciption=" + eventDesciption
-				+ ", totalSeatingCapacity=" + totalSeatingCapacity + ", eventDateTime=" + eventDateTime
-				+ ", totalTicketRemaining=" + totalTicketRemaining + ", price=" + price + ", createdByUserId="
-				+ createdByUserId + ", createdOn=" + createdOn + "]";
+		return "Events [eventId=" + eventId + ", eventName=" + eventName + ", organizedBy=" + organizedBy
+				+ ", eventType=" + eventType + ", eventLocation=" + eventLocation + ", zipCode=" + zipCode
+				+ ", eventDesciption=" + eventDesciption + ", totalSeatingCapacity=" + totalSeatingCapacity
+				+ ", eventDateFrom=" + eventDateFrom + ", eventDateTo=" + eventDateTo + ", eventTimeFrom="
+				+ eventTimeFrom + ", eventTimeTo=" + eventTimeTo + ", totalTicketRemaining=" + totalTicketRemaining
+				+ ", price=" + price + ", createdByUserId=" + createdByUserId + ", createdOn=" + createdOn
+				+ ", filePath=" + filePath + "]";
 	}
 
 	

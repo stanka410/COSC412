@@ -3,16 +3,14 @@ package com.eventzone.cosc412.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Customer {
 
     @Id
     @GeneratedValue
-	Long customerId;
+    Long customerId;
     
     @Column(name = "USER_ID")
     Long userId;

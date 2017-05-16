@@ -287,15 +287,16 @@
 //                }
             }
       })
-       .find('#dateTimePickerId')
-       .datetimepicker({
-           onSelect: function(date, inst) {
-               /* Revalidate the field when choosing it from the datepicker */
-               $('#add-events-form').bootstrapValidator('revalidateField', 'dateOfBirth');
-           }
-       });
+//       .find('#eventDatePickerFromId')
+//       .datepicker({
+//           onSelect: function(date, inst) {
+//               /* Revalidate the field when choosing it from the datepicker */
+//               $('#add-events-form').bootstrapValidator('revalidateField', 'eventDateFrom');
+//           }
+//       });
         
-      
+        $('#eventDateFromId').datepicker();
+        $('#eventDateToId').datepicker();
         
         
         $('#school_rep_form').bootstrapValidator({

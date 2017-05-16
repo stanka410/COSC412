@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout" th:with="title='Add Facility'">
+<th:block layout:fragment="content">
+
+	<div class="container">
+
+		<form id="paymentForm" autocomplete="off" action="#"
+			th:action="@{/make-payment}" th:object="${paymentDTO}" method="post"
+			class="well form-horizontal" role="form">
+			<fieldset>
+				<legend>Make Payment</legend>
+
+				<!-- Success message -->
+				<div align="center" th:if="${successMessage}">
+					<span class="alert alert-success" role="alert"
+						th:utext="${successMessage}"></span> <br /> <br />
+				</div>
+				<div align="center" th:if="${errorMsg}">
+					<span class="alert alert-danger" role="alert"
+						th:utext="${errorMsg}"></span> <br /> <br />
+				</div>
+
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="facilityNameId">Facility
+						Name</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input id="facilityNameId"
+								type="text" th:field="*{facilityName}" readonly="readonly"
+								placeholder="Facility Name" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="facilityDescriptionId">Facility
+						Description</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input
+								id="facilityDescriptionId" type="text" readonly="readonly"
+								th:field="*{facilityDescription}"
+								placeholder="Facility Description" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="facilityLocationId">Location</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-envelope"></i></span> <input
+								id="facilityLocationId" type="text" readonly="readonly"
+								th:field="*{facilityLocation}" placeholder="Facility Location"
+								class="form-control" />
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="schoolNameId">School
+						Name</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-lock"></i></span> <input id="schoolNameId"
+								type="text" readonly="readonly" th:field="*{schoolName}"
+								placeholder="School Name" class="form-control" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="pricePerHourId">Price
+						Per Hour ($)</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control" id="pricePerHourId"
+								placeholder="Price Per Hour" readonly="readonly"
+								th:field="*{pricePerHour}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="totalSeatingCapacityId">Seating
+						Capacity</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control" id="totalSeatingCapacityId"
+								readonly="readonly" placeholder="Seating Capacity"
+								th:field="*{totalSeatingCapacity}" />
+						</div>
+					</div>
+				</div>
+								<div class="form-group">
+					<label class="col-md-4 control-label" for="totalHourId">Total Hour</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control" id="totalHourId"
+								th:field="*{totalHour}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="cardHolderNameId">Card
+						Holder Name</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control" id="cardHolderNameId"
+								th:field="*{cardHolderName}" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="cardNumberId">Card
+					</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span>
+							<div id="cardNumberId" class="form-control"></div>
+
+							<!-- <span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control"  th:field="*{cardNumber}" /> -->
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="zipCodeId">Zip
+						Code</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
+								class="form-control" id="zipCodeId"
+								placeholder="11111" th:field="*{zipCode}" />
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Used to display Element errors -->
+				<div id="card-errors" role="alert"></div>
+
+
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-4 control-label"></label>
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-primary btn-block">Submit</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<script src="https://js.stripe.com/v3/"></script>
+	<script type="text/javascript" th:src="@{/js/utility.js}"></script>
+
+</th:block>
+</html>
