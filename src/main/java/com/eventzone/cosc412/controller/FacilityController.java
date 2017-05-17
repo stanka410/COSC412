@@ -92,14 +92,14 @@ public class FacilityController {
 			paymentDTO.setPricePerHour(facilityDTO.getPricePerHour());
 			paymentDTO.setFacilityId(facilityDTO.getFacilityId());
 			modelAndView.addObject("paymentDTO", paymentDTO);
-			modelAndView.setViewName("/make-payment");
+			modelAndView.setViewName("make-payment");
 		}
 		return modelAndView;
 	}
 	
 	
 	
-	@RequestMapping(value="/schoolRep/add-facility", method = RequestMethod.GET)
+	@RequestMapping(value="schoolRep/add-facility", method = RequestMethod.GET)
 	public ModelAndView addFacilty(){
 		ModelAndView modelAndView = new ModelAndView();
 		FacilityDTO fdto = new FacilityDTO();
@@ -123,11 +123,11 @@ public class FacilityController {
 //		modelAndView.addObject("registrationDTO", rdto);
 		//fdtos = facilityService.getLandingFacility();
 		modelAndView.addObject("facilityDTO", fdto);
-		modelAndView.setViewName("/schoolRep/add-facility");
+		modelAndView.setViewName("schoolRep/add-facility");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/schoolRep/add-facility", method = RequestMethod.POST)
+	@RequestMapping(value = "schoolRep/add-facility", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid FacilityDTO facilityDTO, BindingResult bindingResult) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
@@ -143,7 +143,7 @@ public class FacilityController {
 		FacilityDTO fdto = new FacilityDTO();
 		
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("/schoolRep/add-facility");
+			modelAndView.setViewName("schoolRep/add-facility");
 			fdto = facilityDTO;
 		} else {
 			
@@ -160,7 +160,7 @@ public class FacilityController {
 			modelAndView.addObject("successMessage", facilityDTO.getFacilityName() + " has been saved successfully");
 			modelAndView.addObject("facilityDTO", facilityDTO);
 
-			modelAndView.setViewName("/search-facility");
+			modelAndView.setViewName("search-facility");
 			
 		}
 		modelAndView.addObject("facilityDTO", fdto);
@@ -191,12 +191,12 @@ public class FacilityController {
 		if(facility.getBookedTo() != null || facility.getBookedFrom() != null)
 		{
 			modelAndView.addObject("errorMessage", facility.getFacilityName() + " cannot be updated at this time. It still have bookings.");
-			modelAndView.setViewName("/schoolRep/facilityManagement");
+			modelAndView.setViewName("schoolRep/facility-management");
 		}
 		else
 		{
 			modelAndView.addObject("facilityDTO", fdto);
-			modelAndView.setViewName("/search-facility");
+			modelAndView.setViewName("add-facility");
 			
 		}
 		return modelAndView;
@@ -234,7 +234,7 @@ public class FacilityController {
 		List<Facility> facilityList = facilityService.findBySchoolId(school.getSchoolId());
 		modelAndView.addObject("facilityList", facilityList);
 		
-		modelAndView.setViewName("/schoolRep/facility-management");
+		modelAndView.setViewName("schoolRep/facility-management");
 		return modelAndView;
 	}
 	

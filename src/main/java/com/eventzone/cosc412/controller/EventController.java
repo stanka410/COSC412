@@ -43,7 +43,7 @@ public class EventController {
 	public ModelAndView addEventsForm(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("eventDTO", new EventDTO());
-		modelAndView.setViewName("/admin/add-events");
+		modelAndView.setViewName("admin/add-events");
 		return modelAndView;
 	}
 	
@@ -60,7 +60,7 @@ public class EventController {
 		}
 		
 		modelAndView.addObject("eventDTO", eventDTO);
-		modelAndView.setViewName("/admin/add-events");
+		modelAndView.setViewName("admin/add-events");
 		return modelAndView;
 	}
 	

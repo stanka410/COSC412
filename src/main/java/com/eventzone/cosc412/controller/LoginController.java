@@ -203,7 +203,7 @@ public class LoginController {
 		}
 		else
 		{
-			modelAndView.setViewName("/home");
+			modelAndView.setViewName("home");
 		}
 		return modelAndView;
 	}

@@ -6,7 +6,7 @@
 	>
 <head xmlns:th="http://www.thymeleaf.org">
     <meta charset="UTF-8"/>
-    <title>Facility Management</title>
+    <title>Search Management</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -51,8 +51,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facility <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                            <li><a th:href="@{/search-facility}">Search Facility</a></li>
-                           <li sec:authorize="hasAnyAuthority('ADMIN', 'SCHOOL_REP')">
+                           <li sec:authorize="hasAuthority('SCHOOLREP')">
                               <a th:href="@{/schoolRep/add-facility}">Add Facility</a>
+                           </li>
+                            <li sec:authorize="hasAnyAuthority('ADMIN', 'SCHOOLREP')">
+                              <a th:href="@{/schoolRep/facilityManagement}">Facility Management</a>
                            </li>
                           <!--  <li role="separator" class="divider"></li>
                            <li><a href="#">Separated link</a></li> -->
