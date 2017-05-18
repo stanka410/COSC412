@@ -56,6 +56,21 @@ public class FacilityController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="/search-facility_zip}", method = RequestMethod.GET)
+	public ModelAndView searchByZipCode(@RequestParam("searchzip") String searchZip){
+		ModelAndView modelAndView = new ModelAndView();
+		List<FacilityDTO> fdtos = new ArrayList<>();
+//		RegistrationDTO rdto = new RegistrationDTO();
+//		rdto.setRoles(cacheSchedularService.getAllUserRole());
+//		modelAndView.addObject("registrationDTO", rdto);
+		
+		fdtos = (List<FacilityDTO>) facilityService.findByZipCode(searchZip);
+		modelAndView.addObject("facilityDTOList", fdtos);
+		modelAndView.setViewName("search-facility");
+		return modelAndView;
+	}
+
+	
 	@RequestMapping(value = "/rent-facility", method = RequestMethod.POST)
 	public ModelAndView rentFacility(@RequestParam("facilityId") String facilityId,   
             ModelAndView modelAndView, BindingResult bindingResult) {
@@ -128,7 +143,7 @@ public class FacilityController {
 	}
 	
 	@RequestMapping(value = "schoolRep/add-facility", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid FacilityDTO facilityDTO, BindingResult bindingResult) {
+	public ModelAndView createNewFacility(@Valid FacilityDTO facilityDTO, BindingResult bindingResult) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();
 	    UserInfo userExists = userService.findByEmailAndRole(username, "SCHOOLREP");
@@ -158,15 +173,49 @@ public class FacilityController {
 		
 			//userService.saveUser(user);
 			modelAndView.addObject("successMessage", facilityDTO.getFacilityName() + " has been saved successfully");
-			modelAndView.addObject("facilityDTO", facilityDTO);
-
-			modelAndView.setViewName("search-facility");
+			//modelAndView.addObject("facilityDTO", facilityDTO);
+			return searchFacility();
+			//modelAndView.setViewName("search-facility");
 			
 		}
 		modelAndView.addObject("facilityDTO", fdto);
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/schoolRep/Editfacility", method = RequestMethod.POST)
+	public ModelAndView saveEditFacility(@Valid FacilityDTO facilityDTO,BindingResult bindingResult){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();
+	    UserInfo userExists = userService.findByEmailAndRole(username, "SCHOOLREP");
+		
+		if (userExists == null) {
+					bindingResult
+					.rejectValue("email", "error.user",
+							"Ther is issue with your username. Please try again later");
+		}
+		
+		ModelAndView modelAndView = new ModelAndView();
+		FacilityDTO fdto = new FacilityDTO();
+		
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("schoolRep/edit-facility");
+			fdto = facilityDTO;
+		} else {
+			
+				facilityDTO.setUpdatedByUserInfoId(userExists.getUserInfoId());
+			
+			facilityService.saveFacility(facilityDTO);
+		
+			//userService.saveUser(user);
+			modelAndView.addObject("successMessage", facilityDTO.getFacilityName() + " has been saved successfully");
+			//modelAndView.addObject("facilityDTO", facilityDTO);
+			return getAllFacility();
+			//modelAndView.setViewName("search-facility");
+			
+		}
+		modelAndView.addObject("facilityDTO", fdto);
+		return modelAndView;
+	}
 	
 	@RequestMapping(value = "/schoolRep/edit-facility", method = RequestMethod.POST)
 	public ModelAndView editFacility(@RequestParam("facilityId") String facilityId,ModelAndView modelAndView){
@@ -196,7 +245,7 @@ public class FacilityController {
 		else
 		{
 			modelAndView.addObject("facilityDTO", fdto);
-			modelAndView.setViewName("add-facility");
+			modelAndView.setViewName("schoolRep/edit-facility");
 			
 		}
 		return modelAndView;

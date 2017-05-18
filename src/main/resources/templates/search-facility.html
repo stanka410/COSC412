@@ -87,6 +87,8 @@
 <section class="section_div">
 <div class="page-header" style="padding-top: 20px; padding-left: 20px; color: 008F9E;" xmlns:th="http://www.thymeleaf.org">
     <h3>Facility</h3>
+    <h4 sec:authorize="!isAuthenticated()">Please login to rent facility.</h4>
+    
 </div>
 </section>
 <div class="container">

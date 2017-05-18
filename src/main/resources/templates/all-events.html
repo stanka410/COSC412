@@ -104,7 +104,7 @@
                 <th>End Date</th>
                  <th>End Time</th>
                  <th>Price Per Hour ($)</th>
-                
+                <th>Action</th>
             </tr>
         </thead>
         <tfoot>
@@ -139,11 +139,9 @@
                 
                 
                 <td>  
-                	<div sec:authorize="isAuthenticated()" style="float: left;">
-					  <form method="POST" th:action="@{/rent-facility(facilityId=${facility?.facilityId})}">
-				      <button type="submit" class="btn btn-info">Rent</button>
+					  <form method="POST" action="#">
+				      <button type="button" class="btn btn-info">Buy Ticket</button>
 				    </form> 
-				</div>
 				</td>
             </tr>
         </tbody>

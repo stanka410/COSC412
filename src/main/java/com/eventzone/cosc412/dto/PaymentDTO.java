@@ -2,6 +2,16 @@ package com.eventzone.cosc412.dto;
 
 public class PaymentDTO {
 	Long facilityId;
+	
+	Long userInfoId;
+
+	public Long getUserInfoId() {
+		return userInfoId;
+	}
+
+	public void setUserInfoId(Long userInfoId) {
+		this.userInfoId = userInfoId;
+	}
 
 	String facilityName;
 
@@ -30,6 +40,15 @@ public class PaymentDTO {
 	Double totalHour;
 	String currency;
 	Long cardNumber;
+	String expDate;
+	public String getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(String expDate) {
+		this.expDate = expDate;
+	}
+
 	Integer expMonth;
 	Integer expYear;
 	public String getCardHolderName() {

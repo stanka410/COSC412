@@ -55,31 +55,31 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facility <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                            <li><a th:href="@{/search-facility}">Search Facility</a></li>
-                           <li sec:authorize="hasAuthority('SCHOOLREP')">
-                              <a th:href="@{/schoolRep/add-facility}">Add Facility</a>
-                           </li>
-                            <li sec:authorize="hasAnyAuthority('ADMIN', 'SCHOOLREP')">
-                              <a th:href="@{/schoolRep/facilityManagement}">Facility Management</a>
-                           </li>
+	                           <li sec:authorize="hasAuthority('SCHOOLREP')">
+	                              <a th:href="@{/schoolRep/add-facility}">Add Facility</a>
+	                           </li>
+	                            <li sec:authorize="hasAnyAuthority('ADMIN', 'SCHOOLREP')">
+	                              <a th:href="@{/schoolRep/facilityManagement}">Facility Management</a>
+	                           </li>
                           <!--  <li role="separator" class="divider"></li>
                            <li><a href="#">Separated link</a></li> -->
                         </ul>
                      </li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                     <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                     <li sec:authorize="!isAuthenticated()">
                         <a href="/signin" th:href="@{/register-school-rep}">Register As Provider</a>
                      </li>
-                     <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                     <li sec:authorize="!isAuthenticated()">
                         <a href="/signin" th:href="@{/registration}">Register</a>
                      </li>
-                     <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                     <li sec:authorize="!isAuthenticated()">
                         <a href="/signin" th:href="@{/signin}">Sign in</a>
                      </li>
-                     <li th:if="${#authorization.expression('isAuthenticated()')}">
+                     <li sec:authorize="isAuthenticated()">
                         <a href="#" sec:authentication="name"></a> 
                      </li>
-                     <li th:if="${#authorization.expression('isAuthenticated()')}">
+                     <li sec:authorize="isAuthenticated()">
                         <a href="/logout" th:href="@{/logout}">Logout</a>
                      </li>
                   </ul>
@@ -109,19 +109,20 @@
          <div class="container">
             <!-- Example row of columns -->
             <div class="row">
-               <div class="col-sm-4 col-sm-12 col-xs-12">
+<!--                <div class="col-sm-4 col-sm-12 col-xs-12">
                   <div class="promotion">
                      <h1>Rent<br /> a space<i class="fa fa-circle"></i></h1>
-                     <form method="post" action="searchfacilities.php">
+                    
+                     <form method="GET" action="/search-facility_zip">
                         <fieldset>
                            <legend>Search Facilities By Zip Code</legend>
-                           <input type="text" value="enter your zip code" name="searchzip" id="searchzip" />
-                           <input type="submit" />
+                           <input type="text" placeholder="Enter your zip code" name="searchzip" id="searchzip" />
+				      		<button type="submit" style="padding: 6px;" class="btn btn-default">Search</button>
                         </fieldset>
                      </form>
                   </div>
-               </div>
-               <div class="col-sm-4 col-sm-12 col-xs-12">
+               </div> -->
+            <!--    <div class="col-sm-4 col-sm-12 col-xs-12">
                   <div class="promotion">
                      <h1>Find<br />an event<i class="fa fa-circle"></i></h1>
                      <form method="post" action="searchevents.php">
@@ -132,7 +133,8 @@
                         </fieldset>
                      </form>
                   </div>
-               </div>
+                                 </div> -->
+                                 
             </div>
          </div>
          <!-- /container -->       

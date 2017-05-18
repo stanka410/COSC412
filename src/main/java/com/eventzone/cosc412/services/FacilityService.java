@@ -19,4 +19,6 @@ public interface FacilityService {
 	public List<Facility> findFacility();
 
 	public FacilityDTO getLandingFacilityById(Long valueOf);
+
+	public List<FacilityDTO> findByZipCode(String searchZip);
 }

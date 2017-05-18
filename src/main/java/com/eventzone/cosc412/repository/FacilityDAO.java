@@ -12,5 +12,6 @@ import com.eventzone.cosc412.repository.custom.CustomFacilityDAO;
 public interface FacilityDAO extends JpaRepository<Facility, Long>, CustomFacilityDAO{
 	public List<Facility> findBySchoolId(Long schoolId);
 	public Facility findByFacilityId(Long facilityId);
+	public List<Facility> findByZipCode(String searchZip);
 	
 }

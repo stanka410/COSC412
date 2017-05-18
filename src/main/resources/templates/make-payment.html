@@ -75,6 +75,8 @@
 								class="glyphicon glyphicon-lock"></i></span> <input id="schoolNameId"
 								type="text" readonly="readonly" th:field="*{schoolName}"
 								placeholder="School Name" class="form-control" />
+						<input type="hidden" readonly="readonly" th:field="*{schoolId}" /> 
+						<input type="hidden" readonly="readonly" th:field="*{facilityId}" />
 						</div>
 					</div>
 				</div>
@@ -132,6 +134,31 @@
 				
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="cardNumberId">Card
+						Number</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text" maxlength="16"
+								class="form-control" id="cardNumberId"
+								th:field="*{cardNumber}" />
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="expDateId">Expiry date (mm/yyyy)</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-earphone"></i></span> <input type="text" maxlength="7"
+								class="form-control" id="expDateId" placeholder ="mm/yyyy"
+								th:field="*{expDate}" />
+						</div>
+					</div>
+				</div>
+		<!-- 		
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="cardNumberId">Card
 					</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
@@ -139,12 +166,12 @@
 								class="glyphicon glyphicon-earphone"></i></span>
 							<div id="cardNumberId" class="form-control"></div>
 
-							<!-- <span class="input-group-addon"><i
+							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
-								class="form-control"  th:field="*{cardNumber}" /> -->
+								class="form-control"  th:field="*{cardNumber}" />
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="zipCodeId">Zip
@@ -153,7 +180,7 @@
 						<div class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-earphone"></i></span> <input type="text"
-								class="form-control" id="zipCodeId"
+								class="form-control" id="zipCodeId" maxlength="5"
 								placeholder="11111" th:field="*{zipCode}" />
 						</div>
 					</div>

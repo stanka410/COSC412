@@ -54,6 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/search-facility").permitAll()
 		.antMatchers("/make-payment").permitAll()
         .antMatchers("/register-school-rep").permitAll()
+        .antMatchers("/search-facility_zip").permitAll()
         .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest().authenticated()
         .antMatchers("/schoolRep/**").hasAnyAuthority("SCHOOLREP", "ADMIN").anyRequest().authenticated()
         .and().formLogin().loginPage("/login").successHandler(customSuccessHandler)
@@ -62,8 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and().logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/").and().exceptionHandling()
-		.accessDeniedPage("/error");
-        //.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+		.accessDeniedPage("/access-denied");
 		
 //		http.
 //			authorizeRequests()

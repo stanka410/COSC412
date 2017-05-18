@@ -51,6 +51,7 @@ public class FacilityServiceImpl implements FacilityService{
 			fdto.setSchoolAddress(address.getStreetAddress() + " " + address.getCity() + " " + address.getState() + " " + address.getZip());
 			fdto.setSchoolId(school.getSchoolId());
 			fdto.setSchoolName(school.getSchoolName());
+			fdto.setZipCode(facility.getZipCode());
 			
 			fdtos.add(fdto);
 			
@@ -119,6 +120,40 @@ public class FacilityServiceImpl implements FacilityService{
 		fdto.setSchoolName(school.getSchoolName());
 
 		return fdto;
+	}
+
+	@Override
+	public List<FacilityDTO> findByZipCode(String searchZip) {
+		List<FacilityDTO> fdtos =  new ArrayList<> ();// facilityDAO.getLandingFacility();
+		List<Facility> facilityList = facilityDAO.findByZipCode(searchZip);
+	
+		for(Facility facility : facilityList)
+		{
+			if(fdtos.size() >= 10)
+			{
+				break;
+			}
+			
+			FacilityDTO fdto = new FacilityDTO();
+			School school = schoolService.findBySchoolId(facility.getSchoolId());
+			Address address = addressService.findByAddressId(school.getSchoolAddressId());
+			fdto.setFacilityId(facility.getFacilityId());
+			fdto.setFacilityName(facility.getFacilityName());
+			fdto.setFacilityDescription(facility.getFacilityDesciption());
+			fdto.setFacilityLocation(facility.getFacilityLocation());
+			fdto.setBookedFrom(facility.getBookedFrom());
+			fdto.setBookedTo(facility.getBookedTo());
+			fdto.setPricePerHour(facility.getPricePerHour());
+			fdto.setSchoolAddress(address.getStreetAddress() + " " + address.getCity() + " " + address.getState() + " " + address.getZip());
+			fdto.setSchoolId(school.getSchoolId());
+			fdto.setSchoolName(school.getSchoolName());
+			fdto.setZipCode(facility.getZipCode());
+			
+			fdtos.add(fdto);
+			
+		}
+		
+		return fdtos;
 	}
 	
 

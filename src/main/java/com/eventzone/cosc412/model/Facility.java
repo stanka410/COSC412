@@ -50,6 +50,17 @@ public class Facility {
     @Column(name = "UPDATED_BY_USER_INFO_ID")
     Long updatedByUserInfoId;
     
+    @Column(name = "ZIP_CODE")
+    String zipCode;
+    
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
 	public Long getFacilityId() {
 		return facilityId;
 	}

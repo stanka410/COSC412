@@ -1,41 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	xmlns:dt="http://www.thymeleaf.org/dandelion/datatables"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	>
 <head>
-    <title>Add facility</title>
-   <meta charset="UTF-8"/>
-   <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-   <link rel="stylesheet" 
-      th:href="@{/css/bootstrap.min.css}" />
-   <link rel="stylesheet" 
-      th:href="@{/css/plugins.css}" />
-   <link rel="stylesheet" 
-      th:href="@{/css/opensans-web-font.css}" />
-   <link rel="stylesheet" 
-      th:href="@{/css/montserrat-web-font.css}" />
-   <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
-   <link rel="stylesheet" 
-      th:href="@{/css/montserrat-web-font.css}" />
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-   <link rel="stylesheet" th:href="@{/css/style.css}" />
-   <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" />
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-
-<script type="text/javascript" th:src="@{/js/event.js}"></script>
+	<title>Spring Security Tutorial</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	   <link rel="stylesheet" th:href="@{/css/style.css}" />
+  	
 </head>
 <body>
+ <header>
 <nav class="navbar navbar-default navbar-pf navbar-fixed-top" style="padding-bottom: 10px;" role="navigation">
          <!-- <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
             <nav class="mainmenu navbar navbar-default navbar-fixed-top"> -->
@@ -94,151 +72,26 @@
          </div>
          <!-- /.container-fluid -->
       </nav>
-      <div class="container">
-      <section class="section_div">
-            <h3>Add Events</h3>
-      </section>
-<div class="well form-horizontal" >
-	<form  id="contact_form" autocomplete="off" action="#" th:action="@{/schoolRep/add-facility}"
-						th:object="${facilityDTO}" method="post" class="well form-horizontal" 
-						role="form">
-		<fieldset>
-			<legend>Add Facility</legend>
-			
-						<!-- Success message -->
-			<div align="center" th:if="${successMessage}">
-				<span class="alert alert-success" role="alert" th:utext="${successMessage}"></span>
-				<br/><br/>
-			</div>
-			
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="facilityNameId">Facility Name</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="facilityNameId" type="text" th:field="*{facilityName}" placeholder="Facility Name"
-								class="form-control" />
-						<label  th:if="${#fields.hasErrors('facilityName')}" th:errors="*{facilityName}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="facilityDescriptionId" >Facility Description</label> 
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="facilityDescriptionId"	 type="text" th:field="*{facilityDescription}"
-								placeholder="Facility Description" class="form-control" /> 
-							<label th:if="${#fields.hasErrors('facilityDescription')}" th:errors="*{facilityDescription}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="facilityLocationId">Location</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input id="facilityLocationId" type="text" th:field="*{facilityLocation}" placeholder="Facility Location"
-								class="form-control" /> <label
-								th:if="${#fields.hasErrors('facilityLocation')}" th:errors="*{facilityLocation}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="schoolNameId">School Name</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input id="schoolNameId" type="text" readonly="readonly" th:field="*{schoolName}"
-								placeholder="School Name" class="form-control" /> 
-						<input type="hidden" readonly="readonly" th:field="*{schoolId}" /> 
-						<input type="hidden" readonly="readonly" th:field="*{facilityId}" />
-						<input type="hidden" readonly="readonly" th:field="*{addedBy}" />
-					</div>
-				</div>
-			</div>
-			
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="pricePerHourId">Price Per Hour ($)</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-						<input type="text" class="form-control" id="pricePerHourId" placeholder="Price Per Hour" th:field="*{pricePerHour}" />
-						<label
-								th:if="${#fields.hasErrors('pricePerHour')}" th:errors="*{pricePerHour}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="totalSeatingCapacityId">Seating Capacity</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-						<input type="text" class="form-control" id="totalSeatingCapacityId" placeholder="Seating Capacity" th:field="*{totalSeatingCapacity}" />
-						<label
-								th:if="${#fields.hasErrors('totalSeatingCapacity')}" th:errors="*{totalSeatingCapacity}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="isActiveForRentalId">Is Active for Rent</label>  
-				<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-						<select id="isActiveForRentalId"  name="isActiveForRental" class="form-control selectpicker"  th:field="*{isActiveForRental}">
-							<option value="1" >Yes</option>
-							<option value="0">No</option>
-						</select>
-					</div>
-						
-						<label
-								th:if="${#fields.hasErrors('isActiveForRental')}" th:errors="*{isActiveForRental}"
-								class="validation-message"></label>
-					</div>
-				</div>
-			
-			
-
-			<!-- Button -->
-			<div class="form-group">
-				<label class="col-md-4 control-label"></label>
-				<div class="col-md-4">
-					<button type="submit" class="btn btn-primary btn-block">Submit</button>
-				</div>
-			</div>
-		</fieldset>
-	</form>
-	</div>
+    </header>
+    <section class="section_div">
+    </section>
+	<h1 th:text="${errorCode}">500</h1>
+	<p th:text="${errorMessage}">java.lang.NullPointerException</p>
 	
-</div>
-  <!--Footer-->
-      <footer>
-         <div class="container">
-            <hr />
-            <div class="row">
-               <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="social-network">
-                     <a href="#"><i class="fa fa-twitter"></i></a>
-                     <a href="#"><i class="fa fa-instagram"></i></a>
-                     <a href="#"><i class="fa fa-facebook"></i></a>
-                     <a href="#"><i class="fa fa-google-plus"></i></a>
-                  </div>
-               </div>
-               <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="copyright">
-                     <p>Copyright © 2016 VenEdu.com. All rights reserved.</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer></html>
+	<h1 th:text="#{error_title}">Your request cannot be processed <span>:(</span></h1>
+
+    <p th:text="#{error_subtitle}">Sorry, an error has occurred.</p>
+
+    <span th:text="#{error_status}">Status:</span>&nbsp;<span th:text="${error}"></span>&nbsp;(<span th:text="${error}"></span>)<br/>
+    <span th:if="${!#strings.isEmpty(message)}">
+        <span th:text="#{error_message}">Message:</span>&nbsp;<span th:text="${message}"></span><br/>
+    </span>
+
+   <!--  <script th:inline="text">
+        /*<![CDATA[*/
+        var GOOG_FIXURL_LANG = '[[${#locale.language}]]', GOOG_FIXURL_SITE = location.host;
+        /*]]>*/
+    </script>
+    <script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script> -->
+</body>
+</html>
