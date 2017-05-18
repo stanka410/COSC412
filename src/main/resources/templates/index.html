@@ -24,6 +24,14 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
    </head>
    <body>
+   	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+  		var js, fjs = d.getElementsByTagName(s)[0];
+  		if (d.getElementById(id)) return;
+  		js = d.createElement(s); js.id = id;
+  		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+  		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
       <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
@@ -97,7 +105,6 @@
                      <div class="header-details">
                         <h1>reserve venues<i class="fa fa-circle"></i><br />find events<i class="fa fa-circle"></i><br />support public education<i class="fa fa-circle"></i></h1>
                         <p>All in the same convenient location.</p>
-                        <button class="btn btn-default">Read More</button>
                      </div>
                   </div>
                </div>
@@ -139,32 +146,6 @@
          </div>
          <!-- /container -->       
       </section>
-      <section id="portfolio-area" class="sections">
-         <div class="container">
-            <!-- Example row of columns -->
-            <div class="row">
-               <div class="col-sm-6 col-sm-12 col-xs-12">
-                  <div class="portfolio">
-                     <img src="/images/computer.png" alt="" />
-                  </div>
-               </div>
-               <div class="col-sm-5 col-sm-12 col-xs-12">
-                  <div class="portfolio">
-                     <div class="item">
-                        <h1>This<i class="fa fa-circle"></i></h1>
-                        <h5>is placeholder text</h5>
-                        <p>It will probably be deleted.</p>
-                        <p>But I want to keep it as an example for now.</p>
-                        <a href="#">
-                           <h4>more<span><i class="fa fa-long-arrow-right"></i></span></h4>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <!-- /container -->       
-      </section>
 
       <!--Footer-->
       <footer>
@@ -177,6 +158,7 @@
                      <a href="#"><i class="fa fa-instagram"></i></a>
                      <a href="#"><i class="fa fa-facebook"></i></a>
                      <a href="#"><i class="fa fa-google-plus"></i></a>
+                     <div class="fb-share-button" data-href="https://www.venedu.com/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.venedu.com%2F&amp;src=sdkpreparse">Share</a></div>
                   </div>
                </div>
                <div class="col-md-6 col-sm-6 col-xs-12">
